@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Duncan House — Proof of Concept Rebuild
+   Duncan House — Local Design Candidate
    Fresh, semantic, hand-written CSS. No frameworks, no build step.
    Design language: warm boutique-inn, 1880s character with a modern hand.
    ========================================================================== */
@@ -208,6 +208,8 @@ p { margin: 0 0 1em; }
   line-height: 1.8;
 }
 .footer-meta a { color: rgba(250, 243, 231, 0.75); text-decoration: underline; }
+.site-credit { display: inline-block; margin-top: 0.45rem; }
+.site-credit a { color: var(--gold); text-underline-offset: 3px; }
 .poc-notice {
   display: inline-block;
   margin-top: 0.6rem;
@@ -620,14 +622,24 @@ body:not(:has(.split-hero)) main > .section:first-of-type .section-head { animat
    view. If JS never runs, content simply stays fully visible (see base rule
    below) — this is a progressive enhancement, not a requirement to see the page. */
 .reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  opacity: 1;
+  transform: none;
 }
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+.contact-grid-single { grid-template-columns: minmax(0, 620px); }
+.image-panel { overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow-soft); }
+.image-panel img { width: 100%; height: 100%; min-height: 360px; object-fit: cover; }
+.gallery-card.is-clickable { cursor: zoom-in; }
+.gallery-card.is-clickable img { transition: transform .2s ease; }
+.gallery-card.is-clickable:hover img { transform: scale(1.025); }
+.image-lightbox { width: min(94vw, 1100px); max-height: 92vh; border: 0; padding: 0; background: transparent; overflow: visible; }
+.image-lightbox::backdrop { background: rgba(14, 25, 21, .88); }
+.image-lightbox img { width: 100%; max-height: 88vh; object-fit: contain; border-radius: 6px; }
+.image-lightbox button { position: absolute; right: 0; top: -48px; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; background: #fff; color: var(--forest-deep); font-size: 1.8rem; cursor: pointer; }
 
 @media (prefers-reduced-motion: reduce) {
   .site-header .wordmark,
