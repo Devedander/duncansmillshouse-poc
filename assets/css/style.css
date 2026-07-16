@@ -348,6 +348,25 @@ p { margin: 0 0 1em; }
   font-size: 0.92rem;
   color: var(--forest-deep);
 }
+.gallery-card > a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.gallery-card .more-link {
+  display: block;
+  margin-top: 0.3rem;
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.gallery-card > a:hover .more-link { color: var(--clay-deep); }
+.gallery-card > a:focus-visible {
+  outline: 2px solid var(--clay);
+  outline-offset: 2px;
+}
 
 /* ---------- Quote block ---------- */
 .quote-block {
