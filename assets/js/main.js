@@ -1,7 +1,7 @@
 /*
  * Duncan House POC — minimal vanilla JS.
  * Handles: mobile nav toggle, active-link highlighting, stubbed contact form,
- * scroll-triggered fade-ins, and a light momentum/inertia scroll on desktop.
+ * and scroll-triggered fade-ins.
  * No frameworks, no build step, no third-party trackers.
  */
 document.addEventListener("DOMContentLoaded", function () {
@@ -90,63 +90,5 @@ document.addEventListener("DOMContentLoaded", function () {
         observer.observe(el);
       });
     }
-  }
-
-  // Momentum scroll: a light inertia/easing layer over the mouse wheel on
-  // desktop. Touch devices already get native momentum scrolling from the
-  // OS, so this is skipped there, and it's skipped entirely for
-  // prefers-reduced-motion. Keyboard scrolling (arrows, Page Up/Down, Space)
-  // and scrollbar dragging are untouched — this only intercepts the wheel.
-  var isTouch = matchMedia("(pointer: coarse)").matches;
-  if (!reducedMotion && !isTouch) {
-    var current = window.scrollY;
-    var target = window.scrollY;
-    var ticking = false;
-    var maxScroll = function () {
-      return document.documentElement.scrollHeight - window.innerHeight;
-    };
-
-    function animateScroll() {
-      current += (target - current) * 0.12;
-      if (Math.abs(target - current) < 0.4) {
-        current = target;
-        ticking = false;
-      } else {
-        requestAnimationFrame(animateScroll);
-      }
-      window.scrollTo(0, current);
-    }
-
-    window.addEventListener(
-      "wheel",
-      function (e) {
-        // Let pinch-zoom (ctrl+wheel) and horizontal scroll pass through untouched.
-        if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-        e.preventDefault();
-        target += e.deltaY;
-        target = Math.max(0, Math.min(maxScroll(), target));
-        if (!ticking) {
-          ticking = true;
-          requestAnimationFrame(animateScroll);
-        }
-      },
-      { passive: false }
-    );
-
-    // Keep target/current in sync with scrolls that didn't come from the
-    // wheel handler (keyboard, scrollbar, anchor links, back/forward).
-    var syncTimer;
-    window.addEventListener(
-      "scroll",
-      function () {
-        if (ticking) return;
-        clearTimeout(syncTimer);
-        syncTimer = setTimeout(function () {
-          current = window.scrollY;
-          target = window.scrollY;
-        }, 80);
-      },
-      { passive: true }
-    );
   }
 });
