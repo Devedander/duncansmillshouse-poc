@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Contact | Duncan House</title>
-<meta name="description" content="Contact Duncan House in Duncans Mills, CA. Proof-of-concept rebuild, not the live site.">
+<title>Contact | Duncans Mills House</title>
+<meta name="description" content="Contact Duncan House in Duncans Mills, CA. local preview rebuild, not the live site.">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
         <h1>Contact</h1>
       </div>
 
-      <div class="contact-grid">
+      <div class="contact-grid contact-grid-single">
         <div class="contact-card">
           <dl>
             <dt>Address</dt>
@@ -59,46 +59,6 @@
           </dl>
         </div>
 
-        <!--
-          Contact form (proof-of-concept only).
-          The live WordPress site does not currently have a contact form on this
-          page — just the address, email, and phone above plus an embedded map.
-          This form is an added convenience for the rebuild demo.
-
-          Submission is stubbed client-side in assets/js/main.js (no backend).
-          Production option: point the form action at a Formspree endpoint, e.g.
-            <form action="https://formspree.io/f/xxxxxxx" method="POST">
-          and remove the JS preventDefault() handler so it posts normally.
-        -->
-        <form class="contact-form" id="contact-form" method="POST" action="#">
-          <div class="field">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" autocomplete="name" required>
-          </div>
-          <div class="field">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-          </div>
-          <div class="field">
-            <label for="dates">Preferred dates (optional)</label>
-            <input type="text" id="dates" name="dates" placeholder="e.g. Aug 12–15">
-          </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn">Send Message</button>
-          <p class="form-note" id="form-status" hidden></p>
-        </form>
-      </div>
-
-      <div class="map-embed">
-        <iframe
-          src="https://www.google.com/maps?q=24951+CA-116,+Duncans+Mills,+CA+95430&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Map showing the location of Duncan House in Duncans Mills, California">
-        </iframe>
       </div>
     </div>
   </section>
@@ -126,7 +86,7 @@
         <a href="terms-privacy.html">Terms &amp; Privacy</a><br>
         &copy; Copyright 2026 Duncans Mills House
       </p>
-      <span class="poc-notice">Proof of concept rebuild — not the live site</span>
+      <span class="poc-notice">Local design candidate for review.</span>
     </div>
   </div>
 </footer>
