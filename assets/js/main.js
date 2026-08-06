@@ -77,17 +77,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
   var dialog = document.createElement("dialog");
   dialog.className = "image-lightbox";
-  dialog.innerHTML = '<button type="button" aria-label="Close image">×</button><img alt="" hidden>';
+  dialog.innerHTML = '<button type="button" aria-label="Close image">×</button><button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous image" hidden>‹</button><img alt="" hidden><button type="button" class="lightbox-nav lightbox-next" aria-label="Next image" hidden>›</button>';
   document.body.appendChild(dialog);
   var dialogImage = dialog.querySelector("img");
+  var previousImageButton = dialog.querySelector(".lightbox-prev");
+  var nextImageButton = dialog.querySelector(".lightbox-next");
+  var activeGalleryImages = [];
+  var activeGalleryIndex = 0;
+  var showGalleryImage = function (index) {
+    activeGalleryIndex = (index + activeGalleryImages.length) % activeGalleryImages.length;
+    var activeImage = activeGalleryImages[activeGalleryIndex];
+    dialogImage.src = activeImage.src;
+    dialogImage.alt = activeImage.alt;
+    dialogImage.hidden = false;
+  };
   dialog.querySelector("button").addEventListener("click", function () { dialog.close(); });
+  previousImageButton.addEventListener("click", function () { showGalleryImage(activeGalleryIndex - 1); });
+  nextImageButton.addEventListener("click", function () { showGalleryImage(activeGalleryIndex + 1); });
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener("keydown", function (event) {
+    if (activeGalleryImages.length < 2) return;
+    if (event.key === "ArrowLeft") { event.preventDefault(); showGalleryImage(activeGalleryIndex - 1); }
+    if (event.key === "ArrowRight") { event.preventDefault(); showGalleryImage(activeGalleryIndex + 1); }
+  });
   document.querySelectorAll(".gallery-card img:not(.static-zoom-image), .outdoors-gallery img").forEach(function (image) {
     image.closest(".gallery-card")?.classList.add("is-clickable");
     image.addEventListener("click", function () {
-      dialogImage.src = image.src;
-      dialogImage.alt = image.alt;
-      dialogImage.hidden = false;
+      var gallery = image.closest(".local-shops-gallery, .outdoors-gallery");
+      activeGalleryImages = gallery ? Array.from(gallery.querySelectorAll("img")) : [image];
+      previousImageButton.hidden = activeGalleryImages.length < 2;
+      nextImageButton.hidden = activeGalleryImages.length < 2;
+      showGalleryImage(activeGalleryImages.indexOf(image));
       dialog.showModal();
     });
   });
