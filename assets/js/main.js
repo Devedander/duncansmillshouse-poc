@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var dialogImage = dialog.querySelector("img");
   dialog.querySelector("button").addEventListener("click", function () { dialog.close(); });
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
-  document.querySelectorAll(".gallery-card img, .outdoors-gallery img").forEach(function (image) {
+  document.querySelectorAll(".gallery-card img:not(.static-zoom-image), .outdoors-gallery img").forEach(function (image) {
     image.closest(".gallery-card")?.classList.add("is-clickable");
     image.addEventListener("click", function () {
       dialogImage.src = image.src;
@@ -96,5 +96,48 @@ document.addEventListener("DOMContentLoaded", function () {
   var creditHost = footerMeta.length ? footerMeta[footerMeta.length - 1] : null;
   if (creditHost && !creditHost.querySelector(".site-credit")) {
     creditHost.insertAdjacentHTML("beforeend", '<br><span class="site-credit">Website by <a href="https://johnwangcs.com" target="_blank" rel="noopener noreferrer">johnwangcs.com</a></span>');
+  }
+
+  /* Give every page the same gentle fade-and-lift entrance as the home hero. */
+  var loadGroups = document.querySelectorAll([
+    ".site-header .wordmark",
+    ".site-header .main-nav li",
+    "main .breadcrumb",
+    "main .hero-copy > *",
+    "main .hero-image",
+    "main .section-head > *",
+    "main .two-col > *",
+    "main .gallery-grid > *",
+    "main .photo-strip > *",
+    "main .contact-grid > *",
+    "main .legal-content > *",
+    "main .rate-highlight",
+    "main .quote-block .container > *",
+    ".site-footer .container > *"
+  ].join(","));
+
+  loadGroups.forEach(function (element, index) {
+    element.classList.add("load-in");
+    element.style.setProperty("--load-delay", Math.min(index * 45, 720) + "ms");
+  });
+  document.body.classList.add("motion-ready");
+
+  /* The Village image begins its zoom only once it is actually on screen. */
+  var viewportZoomImages = document.querySelectorAll(".split-hero ~ .section .image-panel img");
+  if (viewportZoomImages.length) {
+    var revealImageZoom = function (image) { image.classList.add("viewport-zoom"); };
+    if ("IntersectionObserver" in window) {
+      var imageZoomObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            revealImageZoom(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.25 });
+      viewportZoomImages.forEach(function (image) { imageZoomObserver.observe(image); });
+    } else {
+      viewportZoomImages.forEach(revealImageZoom);
+    }
   }
 });
