@@ -346,6 +346,34 @@ p { margin: 0 0 1em; }
   grid-template-columns: repeat(3, 1fr);
   gap: 1.4rem;
 }
+/* Room-detail galleries use a four-up contact sheet. Flex keeps incomplete
+   final rows centered while every thumbnail keeps the same footprint. */
+.live-gallery-section .gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.4rem;
+}
+.live-gallery-section .gallery-card {
+  /* Leave a hair of spare room so browser rounding never wraps tile four. */
+  flex: 0 0 calc(25% - 1.1rem);
+  margin: 0;
+}
+/* Small room galleries use their natural column count instead of reserving
+   empty fourth slots; larger galleries retain the four-up contact sheet. */
+.live-gallery-section.gallery-count-2 .gallery-card {
+  flex-basis: calc(50% - 0.8rem);
+}
+.live-gallery-section.gallery-count-3 .gallery-card {
+  flex-basis: calc((100% - 2.8rem) / 3 - 0.2rem);
+}
+
+/* Keep the room-detail reservation action centered beneath its copy. */
+main > .panel-cream-deep .container[style*="640px"] .btn {
+  display: flex;
+  width: fit-content;
+  margin: 1.6rem auto 0;
+}
 .local-shops-gallery {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   column-gap: 0.75rem;
@@ -503,6 +531,14 @@ body:not(:has(.split-hero)) .gallery-card {
   font-weight: 700;
 }
 
+/* Reservation policies sit on the dark forest panel, so use the lightest
+   parchment tone instead of the muted body-copy color. */
+.panel-forest .reservation-policies-title,
+.panel-forest .reservation-policies,
+.panel-forest .reservation-policies li {
+  color: var(--cream);
+}
+
 .rate-highlight {
   background: var(--cream-deep);
   border-left: 4px solid var(--clay);
@@ -608,6 +644,7 @@ body:not(:has(.split-hero)) .gallery-card {
   .split-hero .hero-copy { padding: 2.6rem 1.5rem; }
   .photo-strip { grid-template-columns: repeat(3, 1fr); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .live-gallery-section .gallery-card { flex-basis: calc(50% - 0.8rem); }
   .local-shops-gallery { grid-template-columns: repeat(2, 1fr); }
   .card-row { grid-template-columns: 1fr; }
   .two-col { grid-template-columns: 1fr; gap: 2rem; }

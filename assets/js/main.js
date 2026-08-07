@@ -15,34 +15,34 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   var roomGalleries = {
-    "room-ophelia.html": [
+    "room-ophelia": [
       ["upstairs-bedroom-ophelia.jpg", "Upstairs Bedroom - Ophelia"],
       ["upstairs-bedroom-ophelia-002.jpg", "Upstairs Bedroom - Ophelia"]
     ],
-    "room-lolita.html": [
+    "room-lolita": [
       ["upstairs-bedroom-lolita.jpg", "Upstairs Bedroom - Lolita"],
       ["upstairs-bedroom-lolita-002.jpg", "Upstairs Bedroom - Lolita"],
       ["duncan-house-bedroom-001.jpg", "Duncan House Bedroom"]
     ],
-    "room-upstairs-bath.html": [
+    "room-upstairs-bath": [
       ["upstairs-bathroom-003.jpg", "Upstairs Bathroom"],
       ["upstairs-bathroom-001.jpg", "Upstairs Bathroom"],
       ["upstairs-bathroom-002.jpg", "Upstairs Bathroom"]
     ],
-    "room-athenia.html": [["downstairs-bedroom-athenia.jpg", "Downstairs Bedroom - Athenia"]],
-    "room-jezebel.html": [
+    "room-athenia": [["downstairs-bedroom-athenia.jpg", "Downstairs Bedroom - Athenia"]],
+    "room-jezebel": [
       ["downstairs-bathroom-x-3.jpg", "Downstairs Bedroom - Jezebel"],
       ["downstairs-bedroom-x2.jpg", "Downstairs Bedroom - Jezebel"]
     ],
-    "room-downstairs-bath.html": [["downstairs-bathroom.jpg", "Downstairs Bathroom"]],
-    "room-dining.html": [
+    "room-downstairs-bath": [["downstairs-bathroom.jpg", "Downstairs Bathroom"]],
+    "room-dining": [
       ["dining-room.jpg", "Dining & Sitting Rooms"],
       ["living-room-fireplace.jpg", "Dining & Sitting Rooms"],
       ["siiting-room-stove.jpg", "Dining & Sitting Rooms"],
       ["parlor-piano.jpg", "Dining & Sitting Rooms"]
     ],
-    "room-kitchen.html": [["kitchen.jpg", "Kitchen"]],
-    "room-grounds-decks.html": [
+    "room-kitchen": [["kitchen.jpg", "Kitchen"]],
+    "room-grounds-decks": [
       ["front-deck.jpg", "Grounds & Decks"],
       ["grounds-field2.jpg", "Grounds & Decks"],
       ["grounds-chairs.jpg", "Grounds & Decks"],
@@ -57,11 +57,24 @@ document.addEventListener("DOMContentLoaded", function () {
     ]
   };
 
-  var file = window.location.pathname.split("/").pop() || "index.html";
-  var gallery = roomGalleries[file];
+  /* Cloudflare Pages supports both /room-ophelia and /room-ophelia.html.
+     Normalize the current path so room galleries work on either URL. */
+  var roomGalleryKey = (window.location.pathname.split("/").pop() || "index").replace(/\.html$/i, "");
+  var liveRoomAliases = {
+    "upstairs-bedroom-ophelia": "room-ophelia",
+    "upstairs-bedroom-lolita": "room-lolita",
+    "upstairs-bathroom": "room-upstairs-bath",
+    "downstairs-bedroom-athenia": "room-athenia",
+    "downstairs-bedroom-jezebel": "room-jezebel",
+    "downstairs-bathroom": "room-downstairs-bath",
+    "dining-sitting-rooms": "room-dining",
+    "kitchen": "room-kitchen",
+    "grounds-decks": "room-grounds-decks"
+  };
+  var gallery = roomGalleries[liveRoomAliases[roomGalleryKey] || roomGalleryKey];
   if (gallery) {
     var section = document.createElement("section");
-    section.className = "section panel-cream-deep tight live-gallery-section";
+    section.className = "section panel-cream-deep tight live-gallery-section gallery-count-" + gallery.length;
     section.innerHTML = '<div class="container"><div class="section-head"><h2>View Gallery:</h2><p>(Click any thumbnail)</p></div><div class="gallery-grid"></div></div>';
     var grid = section.querySelector(".gallery-grid");
     gallery.forEach(function (item) {
@@ -103,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".gallery-card img:not(.static-zoom-image), .outdoors-gallery img").forEach(function (image) {
     image.closest(".gallery-card")?.classList.add("is-clickable");
     image.addEventListener("click", function () {
-      var gallery = image.closest(".local-shops-gallery, .outdoors-gallery");
+      var gallery = image.closest(".local-shops-gallery, .outdoors-gallery, .live-gallery-section .gallery-grid");
       activeGalleryImages = gallery ? Array.from(gallery.querySelectorAll("img")) : [image];
       previousImageButton.hidden = activeGalleryImages.length < 2;
       nextImageButton.hidden = activeGalleryImages.length < 2;
