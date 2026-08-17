@@ -12,4 +12,4 @@ Included:
 - Click-to-view image lightbox, responsive navigation, email and telephone links.
 - Contact page parity: address, email, and telephone only; no form or map is added because neither exists on the live page.
 
-The pages remain `noindex, nofollow` while under review. Open `index.html` directly or serve this folder using any static web server.
+The site is prepared for production indexing. Open `index.html` directly or serve this folder using any static web server.
