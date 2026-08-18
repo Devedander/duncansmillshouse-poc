@@ -662,6 +662,8 @@ body:not(:has(.split-hero)) .gallery-card {
   }
   .main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--gold); border-color: var(--gold); }
   .photo-strip { grid-template-columns: repeat(2, 1fr); }
+
+  .gallery-grid.outdoors-gallery { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
