@@ -1,4 +1,4 @@
-# Duncans Mills House: local redesign with live-site parity
+# Duncan House website
 
 This framework-free static site preserves the current public content and visitor-facing behavior of `duncansmillshouse.com` while using a distinct, modern historic-river-retreat layout.
 

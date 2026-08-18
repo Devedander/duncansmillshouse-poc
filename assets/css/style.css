@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Duncan House: Local Design Candidate
+   Duncan House public website
    Fresh, semantic, hand-written CSS. No frameworks, no build step.
    Design language: warm boutique-inn, 1880s character with a modern hand.
    ========================================================================== */
@@ -210,19 +210,6 @@ p { margin: 0 0 1em; }
 .footer-meta a { color: rgba(250, 243, 231, 0.75); text-decoration: underline; }
 .site-credit { display: inline-block; margin-top: 0.45rem; }
 .site-credit a { color: var(--gold); text-underline-offset: 3px; }
-.poc-notice {
-  display: inline-block;
-  margin-top: 0.6rem;
-  padding: 0.3em 0.7em;
-  background: rgba(200, 155, 74, 0.16);
-  border: 1px solid rgba(200, 155, 74, 0.4);
-  border-radius: 6px;
-  color: var(--gold);
-  font-weight: 700;
-  font-size: 0.76rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
 
 /* ---------- Breadcrumb ---------- */
 .breadcrumb {
