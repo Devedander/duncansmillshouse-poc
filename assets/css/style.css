@@ -232,7 +232,7 @@ p { margin: 0 0 1em; }
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4rem clamp(1.5rem, 5vw, 5rem);
+  padding: 4rem clamp(1.5rem, 5vw, 5rem) 4rem max(1.5rem, calc((100vw - var(--max)) / 2 + 1.5rem));
 }
 .split-hero .hero-copy p.lede {
   font-size: 1.1rem;
@@ -243,6 +243,7 @@ p { margin: 0 0 1em; }
   position: relative;
   overflow: hidden;
   background: var(--forest-deep);
+  margin-right: max(1.5rem, calc((100vw - var(--max)) / 2 + 1.5rem));
 }
 .split-hero .hero-image img {
   width: 100%;
@@ -627,7 +628,7 @@ body:not(:has(.split-hero)) .gallery-card {
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .split-hero { grid-template-columns: 1fr; min-height: auto; }
-  .split-hero .hero-image { order: -1; height: 320px; }
+  .split-hero .hero-image { order: -1; height: 320px; margin-right: 0; }
   .split-hero .hero-copy { padding: 2.6rem 1.5rem; }
   .photo-strip { grid-template-columns: repeat(3, 1fr); }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
