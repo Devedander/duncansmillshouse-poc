@@ -677,6 +677,11 @@ body:not(:has(.split-hero)) .gallery-card {
   .section { padding: 3rem 0; }
 }
 
+@media (max-width: 720px) {
+  body.accommodation-page .gallery-grid { grid-template-columns: 1fr; }
+  body.accommodation-page .gallery-card .thumb { aspect-ratio: 4 / 3; }
+}
+
 /* ==========================================================================
    Motion: load-in fades and scroll reveals.
    Everything here is skipped for prefers-reduced-motion (see bottom of file).
