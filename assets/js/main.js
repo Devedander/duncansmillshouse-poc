@@ -114,6 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (event.key === "ArrowRight") { event.preventDefault(); showGalleryImage(activeGalleryIndex + 1); }
   });
   document.querySelectorAll(".gallery-card img:not(.static-zoom-image), .outdoors-gallery img").forEach(function (image) {
+    /* Linked room cards should navigate straight to their detail pages. */
+    if (image.closest(".gallery-card a")) return;
     image.closest(".gallery-card")?.classList.add("is-clickable");
     image.addEventListener("click", function () {
       var gallery = image.closest(".local-shops-gallery, .outdoors-gallery, .live-gallery-section .gallery-grid");
