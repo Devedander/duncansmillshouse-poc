@@ -1,3 +1,5 @@
+// GA4 tracking for Duncans Mills House.
+(function(){var id="G-70S2X8T29J",s=document.createElement("script");s.async=true;s.src="https://www.googletagmanager.com/gtag/js?id="+id;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){dataLayer.push(arguments)};gtag("js",new Date);gtag("config",id);document.addEventListener("click",function(e){var a=e.target.closest("a"),h=a&&a.getAttribute("href")||"",n=h.indexOf("tel:")===0?"phone_click":h.indexOf("mailto:")===0?"email_click":/contact/i.test(h)?"contact_click":null;if(n)gtag("event",n,{link_url:h,page_location:location.href})})})();
 document.addEventListener("DOMContentLoaded", function () {
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.querySelector(".main-nav");
